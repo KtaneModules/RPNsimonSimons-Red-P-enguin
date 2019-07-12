@@ -29,5 +29,6 @@ MonoBehaviour:
     Thanks to eXish for helping me fix my errors because I was dumb while coding this.
 
     =='
+  version: 1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 1f942dbf46bf38d41afc309feb28bbd1, type: 3}
