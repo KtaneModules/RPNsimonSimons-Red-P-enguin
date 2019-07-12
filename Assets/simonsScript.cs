@@ -52,7 +52,7 @@ public class simonsScript : MonoBehaviour {
             buttonIndex = UnityEngine.Random.Range(0, 15);
             button1 = Whatareyoudoingheregobacktodefusingyourbomb[buttonIndex];
             selSelectedButton = button1;
-            Debug.LogFormat("Simon Simons [#{0}]: The first button is {1}.", ModuleId, button1);
+            DebugMsg(" The first button is " + button1);
             light1 = lights[buttonIndex];
             CorrectButtonFinder();
         }
@@ -61,7 +61,7 @@ public class simonsScript : MonoBehaviour {
             buttonIndex = UnityEngine.Random.Range(0, 15);
             button2 = Whatareyoudoingheregobacktodefusingyourbomb[buttonIndex];
             selSelectedButton = button2;
-            Debug.LogFormat("Simon Simons [#{0}]: The second button is {1}.", ModuleId, button2);
+            DebugMsg("The second button is " + button2);
             light2 = lights[buttonIndex];
             CorrectButtonFinder();
         }
@@ -70,7 +70,7 @@ public class simonsScript : MonoBehaviour {
             buttonIndex = UnityEngine.Random.Range(0, 15);
             button3 = Whatareyoudoingheregobacktodefusingyourbomb[buttonIndex];
             selSelectedButton = button3;
-            Debug.LogFormat("Simon Simons [#{0}]: The third button is {1}.", ModuleId, button3);
+            DebugMsg("The third button is " + button3);
             light3 = lights[buttonIndex];
             CorrectButtonFinder();
         }
@@ -79,7 +79,7 @@ public class simonsScript : MonoBehaviour {
             buttonIndex = UnityEngine.Random.Range(0, 15);
             button4 = Whatareyoudoingheregobacktodefusingyourbomb[buttonIndex];
             selSelectedButton = button4;
-            Debug.LogFormat("Simon Simons [#{0}]: The fourth button is {1}.", ModuleId, button4);
+            DebugMsg("The fourth button is " + button4);
             light4 = lights[buttonIndex];
             CorrectButtonFinder();
         }
@@ -88,7 +88,7 @@ public class simonsScript : MonoBehaviour {
             buttonIndex = UnityEngine.Random.Range(0, 15);
             button5 = Whatareyoudoingheregobacktodefusingyourbomb[buttonIndex];
             selSelectedButton = button5;
-            Debug.LogFormat("Simon Simons [#{0}]: The fifth button is {1}.", ModuleId, button5);
+            DebugMsg("The fifth button is " + button5);
             light5 = lights[buttonIndex];
             CorrectButtonFinder();
         }
@@ -625,7 +625,7 @@ public class simonsScript : MonoBehaviour {
 
             if (incorrect != true)
             {
-                Debug.LogFormat("Simon Simons [#{0}]: Correct sequence. Moving to the next stage.", ModuleId);
+                DebugMsg("Correct sequence. Moving to the next stage.");
                 stageNumber = stageNumber + 1;
                 pressedButton = null;
                 FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
@@ -634,7 +634,7 @@ public class simonsScript : MonoBehaviour {
             {
                 GetComponent<KMBombModule>().HandleStrike();
                 incorrect = false;
-                Debug.LogFormat("Simon Simons [#{0}]: Incorrect sequence. You pressed {1}, when the correct button was {2}.", ModuleId, pressedButton, corButton1);
+                DebugMsg("Incorrect sequence. You pressed " + pressedButton  + ", when the correct button was " + corButton1);
                 pressedButton = null;
                 FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
                 strikeFindColor();
@@ -657,7 +657,7 @@ public class simonsScript : MonoBehaviour {
 
                     if (incorrect != true)
                     {
-                        Debug.LogFormat("Simon Simons [#{0}]: Correct sequence. Moving to the next stage.", ModuleId);
+                        DebugMsg("Correct sequence. Moving to the next stage.");
                         stageNumber = stageNumber + 1;
                         pressedButton = null;
                         placeholder1 = null;
@@ -668,7 +668,7 @@ public class simonsScript : MonoBehaviour {
                     {
                         GetComponent<KMBombModule>().HandleStrike();
                         incorrect = false;
-                        Debug.LogFormat("Simon Simons [#{0}]: Incorrect sequence. You pressed {1}, {2}, when the correct sequence was {3}, {4}.", ModuleId, pressedButton, placeholder1, corButton1, corButton2);
+                        DebugMsg("Incorrect sequence. You pressed " + placeholder1 + " " + pressedButton + ", when the correct sequence was " + corButton1 + " " + corButton2);
                         pressedButton = null;
                         placeholder1 = null;
                         FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
@@ -699,7 +699,7 @@ public class simonsScript : MonoBehaviour {
 
                             if (incorrect != true)
                             {
-                                Debug.LogFormat("Simon Simons [#{0}]: Correct sequence. Moving to the next stage.", ModuleId);
+                                DebugMsg("Correct sequence. Moving to the next stage.");
                                 stageNumber = stageNumber + 1;
                                 pressedButton = null;
                                 placeholder1 = null;
@@ -711,7 +711,7 @@ public class simonsScript : MonoBehaviour {
                             {
                                 GetComponent<KMBombModule>().HandleStrike();
                                 incorrect = false;
-                                Debug.LogFormat("Simon Simons [#{0}]: Incorrect sequence. You pressed {1}, {2}, {3}, when the correct sequence was {4}, {5}, {6}.", ModuleId, pressedButton, placeholder1, placeholder2, corButton1, corButton2, corButton3);
+                                DebugMsg("Incorrect sequence. You pressed " + placeholder1 + " " + placeholder2 + " " + pressedButton + ", when the correct sequence was " + corButton1 + " " + corButton2 + " " + corButton3);
                                 pressedButton = null;
                                 placeholder1 = null;
                                 placeholder2 = null;
@@ -750,7 +750,7 @@ public class simonsScript : MonoBehaviour {
 
                                     if (incorrect != true)
                                     {
-                                        Debug.LogFormat("Simon Simons [#{0}]: Correct sequence. Moving to the next stage.", ModuleId);
+                                        DebugMsg("Correct sequence. Moving to the next stage.");
                                         stageNumber = stageNumber + 1;
                                         pressedButton = null;
                                         placeholder1 = null;
@@ -763,7 +763,7 @@ public class simonsScript : MonoBehaviour {
                                     {
                                         GetComponent<KMBombModule>().HandleStrike();
                                         incorrect = false;
-                                        Debug.LogFormat("Simon Simons [#{0}]: Incorrect sequence. You pressed {1}, {2}, {3}, {4}, when the correct sequence was {5}, {6}, {7}, {8}.", ModuleId, pressedButton, placeholder1, placeholder2, placeholder3, corButton1, corButton2, corButton3, corButton4);
+                                        DebugMsg("Incorrect sequence. You pressed " + placeholder1 + " " + placeholder2 + " " + placeholder3 + " " + pressedButton + ", when the correct sequence was " + corButton1 + " " + corButton2 + " " + corButton3 + " " + corButton4);
                                         pressedButton = null;
                                         placeholder1 = null;
                                         placeholder2 = null;
@@ -810,13 +810,13 @@ public class simonsScript : MonoBehaviour {
                                         {
                                             moduleSolved = true;
                                             GetComponent<KMBombModule>().HandlePass();
-                                            Debug.LogFormat("Simon Simons [#{0}]:  Module solved. Have a nice day.", ModuleId);
+                                            DebugMsg("Module solved. Have a nice day.");
                                         }
                                         else
                                         {
                                             GetComponent<KMBombModule>().HandleStrike();
                                             incorrect = false;
-                                            Debug.LogFormat("Simon Simons [#{0}]: Incorrect sequence. You pressed {1}, {2}, {3}, {4}, {5}, when the correct sequence was {6}, {7}, {8}, {9}, {10}.", ModuleId, pressedButton, placeholder1, placeholder2, placeholder3, placeholder4, corButton1, corButton2, corButton3, corButton4, corButton5);
+                                            DebugMsg("Incorrect sequence. You pressed " + placeholder1 + " " + placeholder2 + " " + placeholder3 + " " + placeholder4 + " " + pressedButton + ", when the correct sequence was " + corButton1 + " " + corButton2 + " " + corButton3 + " " + corButton4 + " " + corButton5);
                                             pressedButton = null;
                                             placeholder1 = null;
                                             placeholder2 = null;
@@ -833,6 +833,110 @@ public class simonsScript : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public string TwitchHelpMessage = "Press a button using !{0} press TB to press TB. Valid buttons are TB, TY, TR, TG, RB, RY, RR, RG, LB, LY, LR, LG, BB, BY, BR, BG.";
+    IEnumerator ProcessTwitchCommand(string cmd)
+    {
+        if (cmd.ToLowerInvariant().StartsWith("press "))
+        {
+            string btns = cmd.Substring(6);
+            string[] btnSequence = btns.Split(' ');
+
+            if (btnSequence.Length > 5)
+            {
+                yield return "sendtochaterror Sorry, but that appears to be longer than the maximum sequence.";
+                yield break;
+            }
+
+            foreach (var btn in btnSequence)
+            {
+                yield return null;
+
+                if (btn == "TB")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[0] };
+                }
+
+                else if (btn == "TY")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[1] };
+                }
+
+                else if (btn == "TR")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[2] };
+                }
+
+                else if (btn == "TG")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[3] };
+                }
+                else if (btn == "RB")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[4] };
+                }
+                else if (btn == "RY")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[5] };
+                }
+                else if (btn == "RR")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[6] };
+                }
+                else if (btn == "RG")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[7] };
+                }
+                else if (btn == "LB")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[8] };
+                }
+                else if (btn == "LY")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[9] };
+                }
+                else if (btn == "LR")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[10] };
+                }
+                else if (btn == "LG")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[11] };
+                }
+                else if (btn == "BB")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[12] };
+                }
+                else if (btn == "BY")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[13] };
+                }
+                else if (btn == "BR")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[14] };
+                }
+                else if (btn == "BG")
+                {
+                    yield return new KMSelectable[] { Whatareyoudoingheregobacktodefusingyourbomb[15] };
+                }
+                else
+                {
+                    yield return "sendtochaterror Sorry, I'm not quite sure what one of those is.";
+                    yield break;
+                }
+            }
+        }
+
+        else
+        {
+            yield break;
+        }
+    }
+
+    void DebugMsg(string msg)
+    {
+        Debug.LogFormat("[Simon Simons #{0}] {1}", ModuleId, msg);
     }
 
     void CorrectButtonFinder()
@@ -1052,7 +1156,7 @@ public class simonsScript : MonoBehaviour {
             {
                 corButton1 = selCorrectButton;
                 selSelectedButton = button2;
-                Debug.LogFormat("Simon Simons [#{0}]: The correct button to press for the first color is {1}.", ModuleId, corButton1);
+                DebugMsg("The correct button to press for the first color is " + corButton1);
             }
             else
             {
@@ -1060,7 +1164,7 @@ public class simonsScript : MonoBehaviour {
                 {
                     corButton2 = selCorrectButton;
                     selSelectedButton = button3;
-                    Debug.LogFormat("Simon Simons [#{0}]: The correct button to press for the second color is {1}.", ModuleId, corButton2);
+                    DebugMsg("The correct button to press for the second color is " + corButton2);
                 }
                 else
                 {
@@ -1068,7 +1172,7 @@ public class simonsScript : MonoBehaviour {
                     {
                         corButton3 = selCorrectButton;
                         selSelectedButton = button4;
-                        Debug.LogFormat("Simon Simons [#{0}]: The correct button to press for the third color is {1}.", ModuleId, corButton3);
+                        DebugMsg("The correct button to press for the third color is " + corButton3);
                     }
                     else
                     {
@@ -1076,12 +1180,12 @@ public class simonsScript : MonoBehaviour {
                         {
                             corButton4 = selCorrectButton;
                             selSelectedButton = button5;
-                            Debug.LogFormat("Simon Simons [#{0}]: The correct button to press for the fourth color is {1}.", ModuleId, corButton4);
+                            DebugMsg("The correct button to press for the fourth color is " + corButton4);
                         }
                         else
                         {
                             corButton5 = selCorrectButton;
-                            Debug.LogFormat("Simon Simons [#{0}]: The correct button to press for the fifth color is {1}.", ModuleId, corButton5);
+                            DebugMsg("The correct button to press for the fifth color is " + corButton5);
                         }
                     }
                 }
