@@ -3286,7 +3286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bomb: {fileID: 114813887014857504}
   Audio: {fileID: 114652267964609660}
-  Whatareyoudoingheregobacktodefusingyourbomb:
+  buttons:
   - {fileID: 114873311370103960}
   - {fileID: 114054950516751192}
   - {fileID: 114904164785419228}
@@ -3320,6 +3320,8 @@ MonoBehaviour:
   - {fileID: 108083847733276216}
   - {fileID: 108661848140170452}
   - {fileID: 108841414071295494}
+  TwitchHelpMessage: Press a button using !{0} press TB to press TB. Valid buttons
+    are TB, TY, TR, TG, RB, RY, RR, RG, LB, LY, LR, LG, BB, BY, BR, BG.
 --- !u!114 &114052022115675374
 MonoBehaviour:
   m_ObjectHideFlags: 1
