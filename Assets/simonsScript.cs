@@ -22,8 +22,7 @@ public class simonsScript : MonoBehaviour
     private KMSelectable[] selButtons = new KMSelectable[5];
     private KMSelectable[] corButtons = new KMSelectable[5];
     private Light[] selLights = new Light[5];
-    private List<KMSelectable> placeholders;
-
+    private List<KMSelectable> placeholders = new List<KMSelectable>();
     private bool pickingColors = true;
     private Coroutine FlickerRoutine;
     private bool stopLights = false;
@@ -33,55 +32,43 @@ public class simonsScript : MonoBehaviour
     void pickButtonColor()
     {
         pickingColors = true;
-        if (corButtons[0] == null)
-        {
-            buttonIndex = UnityEngine.Random.Range(0, 15);
-            selButtons[0] = buttons[buttonIndex];
-            selSelectedButton = selButtons[0];
-            DebugMsg(" The first button is " + selButtons[0]);
-            selLights[0] = lights[buttonIndex];
-            CorrectButtonFinder();
-        }
-        if (corButtons[1] == null)
-        {
-            buttonIndex = UnityEngine.Random.Range(0, 15);
-            selButtons[1] = buttons[buttonIndex];
-            selSelectedButton = selButtons[1];
-            DebugMsg("The second button is " + selButtons[1]);
-            selLights[1] = lights[buttonIndex];
-            CorrectButtonFinder();
-        }
-        if (corButtons[2] == null)
-        {
-            buttonIndex = UnityEngine.Random.Range(0, 15);
-            selButtons[2] = buttons[buttonIndex];
-            selSelectedButton = selButtons[2];
-            DebugMsg("The third button is " + selButtons[2]);
-            selLights[2] = lights[buttonIndex];
-            CorrectButtonFinder();
-        }
-        if (corButtons[3] == null)
-        {
-            buttonIndex = UnityEngine.Random.Range(0, 15);
-            selButtons[3] = buttons[buttonIndex];
-            selSelectedButton = selButtons[3];
-            DebugMsg("The fourth button is " + selButtons[3]);
-            selLights[3] = lights[buttonIndex];
-            CorrectButtonFinder();
-        }
-        if (corButtons[4] == null)
-        {
-            buttonIndex = UnityEngine.Random.Range(0, 15);
-            selButtons[4] = buttons[buttonIndex];
-            selSelectedButton = selButtons[4];
-            DebugMsg("The fifth button is " + selButtons[4]);
-            selLights[4] = lights[buttonIndex];
-            CorrectButtonFinder();
-        }
+        //1
+        buttonIndex = UnityEngine.Random.Range(0, 15);
+        selButtons[0] = buttons[buttonIndex];
+        DebugMsg(" The first button is " + selButtons[0]);
+        selLights[0] = lights[buttonIndex];
+        //2
+        buttonIndex = UnityEngine.Random.Range(0, 15);
+        selButtons[1] = buttons[buttonIndex];
+        DebugMsg("The second button is " + selButtons[1]);
+        selLights[1] = lights[buttonIndex];
+        //3
+        buttonIndex = UnityEngine.Random.Range(0, 15);
+        selButtons[2] = buttons[buttonIndex];
+        DebugMsg("The third button is " + selButtons[2]);
+        selLights[2] = lights[buttonIndex];
+        //4
+        buttonIndex = UnityEngine.Random.Range(0, 15);
+        selButtons[3] = buttons[buttonIndex];
+        DebugMsg("The fourth button is " + selButtons[3]);
+        selLights[3] = lights[buttonIndex];
+        //5
+        buttonIndex = UnityEngine.Random.Range(0, 15);
+        selButtons[4] = buttons[buttonIndex];
+        DebugMsg("The fifth button is " + selButtons[4]);
+        selLights[4] = lights[buttonIndex];
+        selSelectedButton = selButtons[0];
+        CorrectButtonFinder();
+
     }
 
     void strikeFindColor()
     {
+        corButtons[0] = null;
+        corButtons[1] = null;
+        corButtons[2] = null;
+        corButtons[3] = null;
+        corButtons[4] = null;
         selSelectedButton = selButtons[0];
         CorrectButtonFinder();
     }
@@ -612,13 +599,12 @@ public class simonsScript : MonoBehaviour
                 incorrect = false;
                 DebugMsg("Incorrect sequence. You pressed " + pressedButton + ", when the correct button was " + corButtons[0]);
                 pressedButton = null;
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
                 strikeFindColor();
             }
         }
         else if (stageNumber == 1)
         {
-            if (placeholders.Count < 1)
+            if (placeholders.Count != 1)
             {
                 placeholders.Add(pressedButton);
             }
@@ -645,9 +631,7 @@ public class simonsScript : MonoBehaviour
                     incorrect = false;
                     DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1]);
                     pressedButton = null;
-                    placeholders[0] = null;
                     placeholders.Clear();
-                    FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
                     strikeFindColor();
                 }
             }
@@ -671,8 +655,6 @@ public class simonsScript : MonoBehaviour
                         DebugMsg("Correct sequence. Moving to the next stage.");
                         stageNumber = stageNumber + 1;
                         pressedButton = null;
-                        placeholders[0] = null;
-                        placeholders[1] = null;
                         stopLights = false;
                         placeholders.Clear();
                         FlickerRoutine = StartCoroutine(FlickerCoRoutine4());
@@ -683,10 +665,7 @@ public class simonsScript : MonoBehaviour
                         incorrect = false;
                         DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2]);
                         pressedButton = null;
-                        placeholders[0] = null;
-                        placeholders[1] = null;
                         placeholders.Clear();
-                        FlickerRoutine = StartCoroutine(FlickerCoRoutine3());
                         strikeFindColor();
                     }
                 }
@@ -710,9 +689,6 @@ public class simonsScript : MonoBehaviour
                     DebugMsg("Correct sequence. Moving to the next stage.");
                     stageNumber = stageNumber + 1;
                     pressedButton = null;
-                    placeholders[0] = null;
-                    placeholders[1] = null;
-                    placeholders[2] = null;
                     stopLights = false;
                     placeholders.Clear();
                     FlickerRoutine = StartCoroutine(FlickerCoRoutine5());
@@ -723,12 +699,8 @@ public class simonsScript : MonoBehaviour
                     incorrect = false;
                     DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + placeholders[2] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2] + " " + corButtons[3]);
                     pressedButton = null;
-                    placeholders[0] = null;
-                    placeholders[1] = null;
-                    placeholders[2] = null;
-                    strikeFindColor();
                     placeholders.Clear();
-                    FlickerRoutine = StartCoroutine(FlickerCoRoutine4());
+                    strikeFindColor();
                 }
             }
         }
@@ -740,7 +712,7 @@ public class simonsScript : MonoBehaviour
             }
             else
             {
-                if (pressedButton != corButtons[4] || placeholders[0] != corButtons[0] || placeholders[1] != corButtons[1] || placeholders[2] != corButtons[2] || placeholders[1] != corButtons[3])
+                if (pressedButton != corButtons[4] || placeholders[0] != corButtons[0] || placeholders[1] != corButtons[1] || placeholders[2] != corButtons[2] || placeholders[3] != corButtons[3])
                 {
                     incorrect = true;
                 }
@@ -755,13 +727,8 @@ public class simonsScript : MonoBehaviour
                 {
                     GetComponent<KMBombModule>().HandleStrike();
                     incorrect = false;
-                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + placeholders[2] + " " + placeholders[1] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2] + " " + corButtons[3] + " " + corButtons[4]);
+                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + placeholders[2] + " " + placeholders[3] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2] + " " + corButtons[3] + " " + corButtons[4]);
                     pressedButton = null;
-                    placeholders[0] = null;
-                    placeholders[1] = null;
-                    placeholders[2] = null;
-                    placeholders[1] = null;
-                    FlickerRoutine = StartCoroutine(FlickerCoRoutine5());
                     strikeFindColor();
                 }
             }
@@ -894,7 +861,7 @@ public class simonsScript : MonoBehaviour
         }
         if (selSelectedButton == buttons[1] && bomb.GetStrikes() == 1)
         {
-            selCorrectButton = buttons[5];
+            selCorrectButton = buttons[0];
         }
         if (selSelectedButton == buttons[1] && bomb.GetStrikes() == 2)
         {
@@ -1090,6 +1057,7 @@ public class simonsScript : MonoBehaviour
                 corButtons[0] = selCorrectButton;
                 selSelectedButton = selButtons[1];
                 DebugMsg("The correct button to press for the first color is " + corButtons[0]);
+                CorrectButtonFinder();
             }
             else
             {
@@ -1098,6 +1066,7 @@ public class simonsScript : MonoBehaviour
                     corButtons[1] = selCorrectButton;
                     selSelectedButton = selButtons[2];
                     DebugMsg("The correct button to press for the second color is " + corButtons[1]);
+                    CorrectButtonFinder();
                 }
                 else
                 {
@@ -1106,6 +1075,7 @@ public class simonsScript : MonoBehaviour
                         corButtons[2] = selCorrectButton;
                         selSelectedButton = selButtons[3];
                         DebugMsg("The correct button to press for the third color is " + corButtons[2]);
+                        CorrectButtonFinder();
                     }
                     else
                     {
@@ -1114,6 +1084,7 @@ public class simonsScript : MonoBehaviour
                             corButtons[3] = selCorrectButton;
                             selSelectedButton = selButtons[4];
                             DebugMsg("The correct button to press for the fourth color is " + corButtons[3]);
+                            CorrectButtonFinder();
                         }
                         else
                         {
@@ -1123,24 +1094,10 @@ public class simonsScript : MonoBehaviour
                     }
                 }
             }
-            if (pickingColors == true && corButtons[4] == null)
-            {
-                pickButtonColor();
-            }
-            else if (pickingColors == true && corButtons[4] != null)
-            {
-                pickingColors = false;
-                StopAllCoroutines();
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
-            }
-            else if (pickingColors != true && corButtons[4] == null)
-            {
-                CorrectButtonFinder();
-            }
-            else
-            {
-
-            }
+        }
+        if(stageNumber == 0)
+        {
+            FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
         }
     }
 }
