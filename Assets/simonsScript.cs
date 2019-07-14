@@ -23,7 +23,6 @@ public class simonsScript : MonoBehaviour
     private KMSelectable[] corButtons = new KMSelectable[5];
     private Light[] selLights = new Light[5];
     private List<KMSelectable> placeholders = new List<KMSelectable>();
-    private bool pickingColors = true;
     private Coroutine FlickerRoutine;
     private bool stopLights = false;
     private int stageNumber = 0;
@@ -31,7 +30,6 @@ public class simonsScript : MonoBehaviour
 
     void pickButtonColor()
     {
-        pickingColors = true;
         //1
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[0] = buttons[buttonIndex];
@@ -73,6 +71,11 @@ public class simonsScript : MonoBehaviour
         CorrectButtonFinder();
     }
 
+    void Start()
+    {
+        pickButtonColor();
+    }
+
     void Awake()
     {
         ModuleId = ModuleIdCounter++;
@@ -86,7 +89,6 @@ public class simonsScript : MonoBehaviour
         {
             light.enabled = false;
         }
-        pickButtonColor();
     }
 
     private IEnumerator FlickerCoRoutine1()
@@ -729,6 +731,7 @@ public class simonsScript : MonoBehaviour
                     incorrect = false;
                     DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + placeholders[2] + " " + placeholders[3] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2] + " " + corButtons[3] + " " + corButtons[4]);
                     pressedButton = null;
+                    placeholders.Clear();
                     strikeFindColor();
                 }
             }
@@ -1050,54 +1053,60 @@ public class simonsScript : MonoBehaviour
             selCorrectButton = buttons[11];
         }
 
-        if (corButtons[4] == null)
+        if(corButtons[0] == null)
         {
-            if (corButtons[0] == null)
+            corButtons[0] = selCorrectButton;
+            DebugMsg("Correct button for Button 1 is " + corButtons[0]);
+            selSelectedButton = selButtons[1];
+            CorrectButtonFinder();
+        }
+        else if (corButtons[1] == null)
+        {
+            corButtons[1] = selCorrectButton;
+            DebugMsg("Correct button for Button 2 is " + corButtons[1]);
+            selSelectedButton = selButtons[2];
+            CorrectButtonFinder();
+        }
+        else if (corButtons[2] == null)
+        {
+            corButtons[2] = selCorrectButton;
+            DebugMsg("Correct button for Button 3 is " + corButtons[2]);
+            selSelectedButton = selButtons[3];
+            CorrectButtonFinder();
+        }
+        else if (corButtons[3] == null)
+        {
+            corButtons[3] = selCorrectButton;
+            DebugMsg("Correct button for Button 4 is " + corButtons[3]);
+            selSelectedButton = selButtons[4];
+            CorrectButtonFinder();
+        }
+        else if(corButtons[4] == null)
+        {
+            corButtons[4] = selCorrectButton;
+            DebugMsg("Correct button for Button 5 is " + corButtons[4]);
+            selSelectedButton = selButtons[4];
+
+            if(stageNumber == 0)
             {
-                corButtons[0] = selCorrectButton;
-                selSelectedButton = selButtons[1];
-                DebugMsg("The correct button to press for the first color is " + corButtons[0]);
-                CorrectButtonFinder();
+                FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
+            }
+            else if(stageNumber == 1)
+            {
+                FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
+            }
+            else if(stageNumber == 2)
+            {
+                FlickerRoutine = StartCoroutine(FlickerCoRoutine3());
+            }
+            else if(stageNumber == 3)
+            {
+                FlickerRoutine = StartCoroutine(FlickerCoRoutine4());
             }
             else
             {
-                if (corButtons[1] == null)
-                {
-                    corButtons[1] = selCorrectButton;
-                    selSelectedButton = selButtons[2];
-                    DebugMsg("The correct button to press for the second color is " + corButtons[1]);
-                    CorrectButtonFinder();
-                }
-                else
-                {
-                    if (corButtons[2] == null)
-                    {
-                        corButtons[2] = selCorrectButton;
-                        selSelectedButton = selButtons[3];
-                        DebugMsg("The correct button to press for the third color is " + corButtons[2]);
-                        CorrectButtonFinder();
-                    }
-                    else
-                    {
-                        if (corButtons[3] == null)
-                        {
-                            corButtons[3] = selCorrectButton;
-                            selSelectedButton = selButtons[4];
-                            DebugMsg("The correct button to press for the fourth color is " + corButtons[3]);
-                            CorrectButtonFinder();
-                        }
-                        else
-                        {
-                            corButtons[4] = selCorrectButton;
-                            DebugMsg("The correct button to press for the fifth color is " + corButtons[4]);
-                        }
-                    }
-                }
+                FlickerRoutine = StartCoroutine(FlickerCoRoutine5());
             }
-        }
-        if(stageNumber == 0)
-        {
-            FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
         }
     }
 }
