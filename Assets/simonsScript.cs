@@ -23,37 +23,51 @@ public class simonsScript : MonoBehaviour
     private KMSelectable[] corButtons = new KMSelectable[5];
     private Light[] selLights = new Light[5];
     private List<KMSelectable> placeholders = new List<KMSelectable>();
+    private KMSelectable otherPlaceholder;
     private Coroutine FlickerRoutine;
     private bool stopLights = false;
     private int stageNumber = 0;
     public Light[] lights;
+    private int currentStrikes = 0;
+    private int amountOfButtonsTP;
+    private bool soundEnabled = false;
+
+    void Update()
+    {
+        if (bomb.GetStrikes() != currentStrikes)
+        {
+            DebugMsg("Strikes: " + bomb.GetStrikes());
+            currentStrikes = bomb.GetStrikes();
+            strikeFindColor();
+        }
+    }
 
     void pickButtonColor()
     {
         //1
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[0] = buttons[buttonIndex];
-        DebugMsg(" The first button is " + selButtons[0]);
+        DebugMsg(" The first button is " + selButtons[0].name);
         selLights[0] = lights[buttonIndex];
         //2
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[1] = buttons[buttonIndex];
-        DebugMsg("The second button is " + selButtons[1]);
+        DebugMsg("The second button is " + selButtons[1].name);
         selLights[1] = lights[buttonIndex];
         //3
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[2] = buttons[buttonIndex];
-        DebugMsg("The third button is " + selButtons[2]);
+        DebugMsg("The third button is " + selButtons[2].name);
         selLights[2] = lights[buttonIndex];
         //4
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[3] = buttons[buttonIndex];
-        DebugMsg("The fourth button is " + selButtons[3]);
+        DebugMsg("The fourth button is " + selButtons[3].name);
         selLights[3] = lights[buttonIndex];
         //5
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[4] = buttons[buttonIndex];
-        DebugMsg("The fifth button is " + selButtons[4]);
+        DebugMsg("The fifth button is " + selButtons[4].name);
         selLights[4] = lights[buttonIndex];
         selSelectedButton = selButtons[0];
         CorrectButtonFinder();
@@ -62,13 +76,20 @@ public class simonsScript : MonoBehaviour
 
     void strikeFindColor()
     {
-        corButtons[0] = null;
-        corButtons[1] = null;
-        corButtons[2] = null;
-        corButtons[3] = null;
-        corButtons[4] = null;
-        selSelectedButton = selButtons[0];
-        CorrectButtonFinder();
+        if (bomb.GetStrikes() < 3)
+        {
+            corButtons[0] = null;
+            corButtons[1] = null;
+            corButtons[2] = null;
+            corButtons[3] = null;
+            corButtons[4] = null;
+            selSelectedButton = selButtons[0];
+            CorrectButtonFinder();
+        }
+        else
+        {
+            return;
+        }
     }
 
     void Start()
@@ -97,30 +118,8 @@ public class simonsScript : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             selLights[0].enabled = true;
-
-            if (selButtons[0] == buttons[0] || selButtons[0] == buttons[4] || selButtons[0] == buttons[8] || selButtons[0] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[0] == buttons[1] || selButtons[0] == buttons[5] || selButtons[0] == buttons[9] || selButtons[0] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[0] == buttons[2] || selButtons[0] == buttons[6] || selButtons[0] == buttons[10] || selButtons[0] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[0];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[0].enabled = false;
         }
@@ -132,58 +131,14 @@ public class simonsScript : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             selLights[0].enabled = true;
-
-            if (selButtons[0] == buttons[0] || selButtons[0] == buttons[4] || selButtons[0] == buttons[8] || selButtons[0] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[0] == buttons[1] || selButtons[0] == buttons[5] || selButtons[0] == buttons[9] || selButtons[0] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[0] == buttons[2] || selButtons[0] == buttons[6] || selButtons[0] == buttons[10] || selButtons[0] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[0];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[0].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[1].enabled = true;
-
-            if (selButtons[1] == buttons[0] || selButtons[1] == buttons[4] || selButtons[1] == buttons[8] || selButtons[1] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[1] == buttons[1] || selButtons[1] == buttons[5] || selButtons[1] == buttons[9] || selButtons[1] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[1] == buttons[2] || selButtons[1] == buttons[6] || selButtons[1] == buttons[10] || selButtons[1] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[1];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[1].enabled = false;
         }
@@ -195,86 +150,20 @@ public class simonsScript : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             selLights[0].enabled = true;
-
-            if (selButtons[0] == buttons[0] || selButtons[0] == buttons[4] || selButtons[0] == buttons[8] || selButtons[0] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[0] == buttons[1] || selButtons[0] == buttons[5] || selButtons[0] == buttons[9] || selButtons[0] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[0] == buttons[2] || selButtons[0] == buttons[6] || selButtons[0] == buttons[10] || selButtons[0] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[0];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[0].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[1].enabled = true;
-
-            if (selButtons[1] == buttons[0] || selButtons[1] == buttons[4] || selButtons[1] == buttons[8] || selButtons[1] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[1] == buttons[1] || selButtons[1] == buttons[5] || selButtons[1] == buttons[9] || selButtons[1] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[1] == buttons[2] || selButtons[1] == buttons[6] || selButtons[1] == buttons[10] || selButtons[1] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[1];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[1].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[2].enabled = true;
-
-            if (selButtons[2] == buttons[0] || selButtons[2] == buttons[4] || selButtons[2] == buttons[8] || selButtons[2] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[2] == buttons[1] || selButtons[2] == buttons[5] || selButtons[2] == buttons[9] || selButtons[2] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[2] == buttons[2] || selButtons[2] == buttons[6] || selButtons[2] == buttons[10] || selButtons[2] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[2];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[2].enabled = false;
         }
@@ -286,114 +175,26 @@ public class simonsScript : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             selLights[0].enabled = true;
-
-            if (selButtons[0] == buttons[0] || selButtons[0] == buttons[4] || selButtons[0] == buttons[8] || selButtons[0] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[0] == buttons[1] || selButtons[0] == buttons[5] || selButtons[0] == buttons[9] || selButtons[0] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[0] == buttons[2] || selButtons[0] == buttons[6] || selButtons[0] == buttons[10] || selButtons[0] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[0];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[0].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[1].enabled = true;
-
-            if (selButtons[1] == buttons[0] || selButtons[1] == buttons[4] || selButtons[1] == buttons[8] || selButtons[1] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[1] == buttons[1] || selButtons[1] == buttons[5] || selButtons[1] == buttons[9] || selButtons[1] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[1] == buttons[2] || selButtons[1] == buttons[6] || selButtons[1] == buttons[10] || selButtons[1] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[1];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[1].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[2].enabled = true;
-
-            if (selButtons[2] == buttons[0] || selButtons[2] == buttons[4] || selButtons[2] == buttons[8] || selButtons[2] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[2] == buttons[1] || selButtons[2] == buttons[5] || selButtons[2] == buttons[9] || selButtons[2] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[2] == buttons[2] || selButtons[2] == buttons[6] || selButtons[2] == buttons[10] || selButtons[2] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[2];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[2].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[3].enabled = true;
-
-            if (selButtons[3] == buttons[0] || selButtons[3] == buttons[4] || selButtons[3] == buttons[8] || selButtons[3] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[3] == buttons[1] || selButtons[3] == buttons[5] || selButtons[3] == buttons[9] || selButtons[3] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[3] == buttons[2] || selButtons[3] == buttons[6] || selButtons[3] == buttons[10] || selButtons[3] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[3];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[3].enabled = false;
         }
@@ -405,144 +206,71 @@ public class simonsScript : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             selLights[0].enabled = true;
-
-            if (selButtons[0] == buttons[0] || selButtons[0] == buttons[4] || selButtons[0] == buttons[8] || selButtons[0] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[0] == buttons[1] || selButtons[0] == buttons[5] || selButtons[0] == buttons[9] || selButtons[0] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[0] == buttons[2] || selButtons[0] == buttons[6] || selButtons[0] == buttons[10] || selButtons[0] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[0];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[0].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[1].enabled = true;
-
-            if (selButtons[1] == buttons[0] || selButtons[1] == buttons[4] || selButtons[1] == buttons[8] || selButtons[1] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[1] == buttons[1] || selButtons[1] == buttons[5] || selButtons[1] == buttons[9] || selButtons[1] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[1] == buttons[2] || selButtons[1] == buttons[6] || selButtons[1] == buttons[10] || selButtons[1] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[1];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[1].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[2].enabled = true;
-
-            if (selButtons[2] == buttons[0] || selButtons[2] == buttons[4] || selButtons[2] == buttons[8] || selButtons[2] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[2] == buttons[1] || selButtons[2] == buttons[5] || selButtons[2] == buttons[9] || selButtons[2] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[2] == buttons[2] || selButtons[2] == buttons[6] || selButtons[2] == buttons[10] || selButtons[2] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[2];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[2].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[3].enabled = true;
-
-            if (selButtons[3] == buttons[0] || selButtons[3] == buttons[4] || selButtons[3] == buttons[8] || selButtons[3] == buttons[12])
-            {
-                Audio.PlaySoundAtTransform("blue", transform);
-            }
-            else
-            {
-                if (selButtons[3] == buttons[1] || selButtons[3] == buttons[5] || selButtons[3] == buttons[9] || selButtons[3] == buttons[13])
-                {
-                    Audio.PlaySoundAtTransform("yellow", transform);
-                }
-                else
-                {
-                    if (selButtons[3] == buttons[2] || selButtons[3] == buttons[6] || selButtons[3] == buttons[10] || selButtons[3] == buttons[14])
-                    {
-                        Audio.PlaySoundAtTransform("red", transform);
-                    }
-                    else
-                    {
-                        Audio.PlaySoundAtTransform("green", transform);
-                    }
-                }
-            }
-
+            otherPlaceholder = selButtons[3];
+            sound();
             yield return new WaitForSeconds(1);
             selLights[3].enabled = false;
             yield return new WaitForSeconds(1);
             selLights[4].enabled = true;
+            otherPlaceholder = selButtons[4];
+            sound();
+            yield return new WaitForSeconds(1);
+            selLights[4].enabled = false;
+        }
+    }
 
-            if (selButtons[4] == buttons[0] || selButtons[4] == buttons[4] || selButtons[4] == buttons[8] || selButtons[4] == buttons[12])
+    void sound()
+    {
+        if (soundEnabled != false)
+        {
+            if (otherPlaceholder == buttons[0] || otherPlaceholder == buttons[4] || otherPlaceholder == buttons[8] || otherPlaceholder == buttons[12])
             {
                 Audio.PlaySoundAtTransform("blue", transform);
+                return;
             }
             else
             {
-                if (selButtons[4] == buttons[1] || selButtons[4] == buttons[5] || selButtons[4] == buttons[9] || selButtons[4] == buttons[13])
+                if (otherPlaceholder == buttons[1] || otherPlaceholder == buttons[5] || otherPlaceholder == buttons[9] || otherPlaceholder == buttons[13])
                 {
                     Audio.PlaySoundAtTransform("yellow", transform);
+                    return;
                 }
                 else
                 {
-                    if (selButtons[4] == buttons[2] || selButtons[4] == buttons[6] || selButtons[4] == buttons[10] || selButtons[4] == buttons[14])
+                    if (otherPlaceholder == buttons[2] || otherPlaceholder == buttons[6] || otherPlaceholder == buttons[10] || otherPlaceholder == buttons[14])
                     {
                         Audio.PlaySoundAtTransform("red", transform);
+                        return;
                     }
                     else
                     {
                         Audio.PlaySoundAtTransform("green", transform);
+                        return;
                     }
                 }
             }
-
-            yield return new WaitForSeconds(1);
-            selLights[4].enabled = false;
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -550,23 +278,9 @@ public class simonsScript : MonoBehaviour
     {
         StopAllCoroutines();
 
-        if (pressedButton == buttons[0] || pressedButton == buttons[4] || pressedButton == buttons[8] || pressedButton == buttons[12])
-        {
-            Audio.PlaySoundAtTransform("blue", transform);
-        }
-        else if (pressedButton == buttons[1] || pressedButton == buttons[5] || pressedButton == buttons[9] || pressedButton == buttons[13])
-        {
-            Audio.PlaySoundAtTransform("yellow", transform);
-        }
-        else if (pressedButton == buttons[2] || pressedButton == buttons[6] || pressedButton == buttons[10] || pressedButton == buttons[14])
-        {
-
-            Audio.PlaySoundAtTransform("red", transform);
-        }
-        else
-        {
-            Audio.PlaySoundAtTransform("green", transform);
-        }
+        soundEnabled = true;
+        otherPlaceholder = pressedButton;
+        sound();
 
         selLights[0].enabled = false;
         selLights[1].enabled = false;
@@ -599,9 +313,8 @@ public class simonsScript : MonoBehaviour
             {
                 GetComponent<KMBombModule>().HandleStrike();
                 incorrect = false;
-                DebugMsg("Incorrect sequence. You pressed " + pressedButton + ", when the correct button was " + corButtons[0]);
+                DebugMsg("Incorrect sequence. You pressed " + pressedButton.name + ", when the correct button was " + corButtons[0].name);
                 pressedButton = null;
-                strikeFindColor();
             }
         }
         else if (stageNumber == 1)
@@ -631,10 +344,9 @@ public class simonsScript : MonoBehaviour
                 {
                     GetComponent<KMBombModule>().HandleStrike();
                     incorrect = false;
-                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1]);
+                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name);
                     pressedButton = null;
                     placeholders.Clear();
-                    strikeFindColor();
                 }
             }
         }
@@ -665,10 +377,9 @@ public class simonsScript : MonoBehaviour
                     {
                         GetComponent<KMBombModule>().HandleStrike();
                         incorrect = false;
-                        DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2]);
+                        DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + placeholders[1].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name + " " + corButtons[2].name);
                         pressedButton = null;
                         placeholders.Clear();
-                        strikeFindColor();
                     }
                 }
             }
@@ -699,10 +410,9 @@ public class simonsScript : MonoBehaviour
                 {
                     GetComponent<KMBombModule>().HandleStrike();
                     incorrect = false;
-                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + placeholders[2] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2] + " " + corButtons[3]);
+                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + placeholders[1].name + " " + placeholders[2].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name + " " + corButtons[2].name + " " + corButtons[3].name);
                     pressedButton = null;
                     placeholders.Clear();
-                    strikeFindColor();
                 }
             }
         }
@@ -724,15 +434,16 @@ public class simonsScript : MonoBehaviour
                     moduleSolved = true;
                     GetComponent<KMBombModule>().HandlePass();
                     DebugMsg("Module solved. Have a nice day.");
+                    StopAllCoroutines();
+                    soundEnabled = false;
                 }
                 else
                 {
                     GetComponent<KMBombModule>().HandleStrike();
                     incorrect = false;
-                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0] + " " + placeholders[1] + " " + placeholders[2] + " " + placeholders[3] + " " + pressedButton + ", when the correct sequence was " + corButtons[0] + " " + corButtons[1] + " " + corButtons[2] + " " + corButtons[3] + " " + corButtons[4]);
+                    DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + placeholders[1].name + " " + placeholders[2].name + " " + placeholders[3].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name + " " + corButtons[2].name + " " + corButtons[3].name + " " + corButtons[4].name);
                     pressedButton = null;
                     placeholders.Clear();
-                    strikeFindColor();
                 }
             }
         }
@@ -751,7 +462,6 @@ public class simonsScript : MonoBehaviour
                 yield return "sendtochaterror Sorry, but that appears to be longer than the maximum sequence.";
                 yield break;
             }
-
             foreach (var btn in btnSequence)
             {
                 yield return null;
@@ -830,7 +540,6 @@ public class simonsScript : MonoBehaviour
                 }
             }
         }
-
         else
         {
             yield break;
@@ -1053,53 +762,53 @@ public class simonsScript : MonoBehaviour
             selCorrectButton = buttons[11];
         }
 
-        if(corButtons[0] == null)
+        if (corButtons[0] == null)
         {
             corButtons[0] = selCorrectButton;
-            DebugMsg("Correct button for Button 1 is " + corButtons[0]);
+            DebugMsg("Correct button for Button 1 is " + corButtons[0].name);
             selSelectedButton = selButtons[1];
             CorrectButtonFinder();
         }
         else if (corButtons[1] == null)
         {
             corButtons[1] = selCorrectButton;
-            DebugMsg("Correct button for Button 2 is " + corButtons[1]);
+            DebugMsg("Correct button for Button 2 is " + corButtons[1].name);
             selSelectedButton = selButtons[2];
             CorrectButtonFinder();
         }
         else if (corButtons[2] == null)
         {
             corButtons[2] = selCorrectButton;
-            DebugMsg("Correct button for Button 3 is " + corButtons[2]);
+            DebugMsg("Correct button for Button 3 is " + corButtons[2].name);
             selSelectedButton = selButtons[3];
             CorrectButtonFinder();
         }
         else if (corButtons[3] == null)
         {
             corButtons[3] = selCorrectButton;
-            DebugMsg("Correct button for Button 4 is " + corButtons[3]);
+            DebugMsg("Correct button for Button 4 is " + corButtons[3].name);
             selSelectedButton = selButtons[4];
             CorrectButtonFinder();
         }
-        else if(corButtons[4] == null)
+        else if (corButtons[4] == null)
         {
             corButtons[4] = selCorrectButton;
-            DebugMsg("Correct button for Button 5 is " + corButtons[4]);
+            DebugMsg("Correct button for Button 5 is " + corButtons[4].name);
             selSelectedButton = selButtons[4];
 
-            if(stageNumber == 0)
+            if (stageNumber == 0)
             {
                 FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
             }
-            else if(stageNumber == 1)
+            else if (stageNumber == 1)
             {
                 FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
             }
-            else if(stageNumber == 2)
+            else if (stageNumber == 2)
             {
                 FlickerRoutine = StartCoroutine(FlickerCoRoutine3());
             }
-            else if(stageNumber == 3)
+            else if (stageNumber == 3)
             {
                 FlickerRoutine = StartCoroutine(FlickerCoRoutine4());
             }

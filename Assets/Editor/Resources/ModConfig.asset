@@ -11,30 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
   m_Name: ModConfig
   m_EditorClassIdentifier: 
-  id: RPNsimonSimons
+  id: simonSimons
   title: Simon Simons
   author: Red Penguin
-  description: '==
-
-    Was there a manufacturing error while making Simon Says modules to make this thing?
-
-
-    Id: RPNsimonSimons
-
-    Title: Simon Simons
-
-    Author: Red Penguin
-
-
-    Thanks to eXish for helping me fix my errors because I was dumb while coding this.
-
-    Thanks to Timwi too who obliterated my script for the point of helping me make
-    it half-bearable to look at.
-
-    Thanks so much to the TP community on Strike_Kaboom''s stream for being so enthusiastic
-    about this mod.
-
-    =='
-  version: 1.0
+  description: "==\r\nWas there a manufacturing error while making Simon Says modules
+    to make this thing?\r\n\r\nId: simonSimons\r\nTitle: Simon Simons\r\nAuthor: Red
+    Penguin\r\n\r\nThanks to eXish for helping me fix my errors because I was dumb
+    while coding this.\r\nThanks to Timwi too who obliterated my script for the point
+    of helping me make it half-bearable to look at.\r\nThanks so much to the TP community
+    on Strike_Kaboom's stream for being so enthusiastic about this mod.\r\n\r\nFind
+    the manual here: https://ktane.timwi.de/HTML/Simon%20Simons.html\n=="
+  version: 1.11
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 1f942dbf46bf38d41afc309feb28bbd1, type: 3}
