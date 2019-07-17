@@ -29,12 +29,12 @@ public class simonsScript : MonoBehaviour
     private int stageNumber = 0;
     public Light[] lights;
     private int currentStrikes = 0;
-    private int amountOfButtonsTP;
+    private bool invalidCommand;
     private bool soundEnabled = false;
 
     void Update()
     {
-        if (bomb.GetStrikes() != currentStrikes)
+        if (bomb.GetStrikes() != currentStrikes && moduleSolved != true)
         {
             DebugMsg("Strikes: " + bomb.GetStrikes());
             currentStrikes = bomb.GetStrikes();
@@ -70,6 +70,7 @@ public class simonsScript : MonoBehaviour
         DebugMsg("The fifth button is " + selButtons[4].name);
         selLights[4] = lights[buttonIndex];
         selSelectedButton = selButtons[0];
+        FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
         CorrectButtonFinder();
 
     }
@@ -116,11 +117,11 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 0 && stopLights == false)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.5f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = false;
         }
     }
@@ -129,17 +130,17 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 1 && stopLights == false)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.5f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = false;
         }
     }
@@ -148,23 +149,23 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 2 && stopLights == false)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.5f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[2].enabled = true;
             otherPlaceholder = selButtons[2];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[2].enabled = false;
         }
     }
@@ -173,29 +174,29 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 3 && stopLights == false)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.5f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[2].enabled = true;
             otherPlaceholder = selButtons[2];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[2].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[3].enabled = true;
             otherPlaceholder = selButtons[3];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[3].enabled = false;
         }
     }
@@ -204,35 +205,35 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 4 && stopLights == false)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.5f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[1].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[2].enabled = true;
             otherPlaceholder = selButtons[2];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[2].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[3].enabled = true;
             otherPlaceholder = selButtons[3];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[3].enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[4].enabled = true;
             otherPlaceholder = selButtons[4];
             sound();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.75f);
             selLights[4].enabled = false;
         }
     }
@@ -314,6 +315,7 @@ public class simonsScript : MonoBehaviour
                 GetComponent<KMBombModule>().HandleStrike();
                 incorrect = false;
                 DebugMsg("Incorrect sequence. You pressed " + pressedButton.name + ", when the correct button was " + corButtons[0].name);
+                FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
                 pressedButton = null;
             }
         }
@@ -346,6 +348,7 @@ public class simonsScript : MonoBehaviour
                     incorrect = false;
                     DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name);
                     pressedButton = null;
+                    FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
                     placeholders.Clear();
                 }
             }
@@ -379,6 +382,7 @@ public class simonsScript : MonoBehaviour
                         incorrect = false;
                         DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + placeholders[1].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name + " " + corButtons[2].name);
                         pressedButton = null;
+                        FlickerRoutine = StartCoroutine(FlickerCoRoutine3());
                         placeholders.Clear();
                     }
                 }
@@ -412,6 +416,7 @@ public class simonsScript : MonoBehaviour
                     incorrect = false;
                     DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + placeholders[1].name + " " + placeholders[2].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name + " " + corButtons[2].name + " " + corButtons[3].name);
                     pressedButton = null;
+                    FlickerRoutine = StartCoroutine(FlickerCoRoutine4());
                     placeholders.Clear();
                 }
             }
@@ -443,10 +448,28 @@ public class simonsScript : MonoBehaviour
                     incorrect = false;
                     DebugMsg("Incorrect sequence. You pressed " + placeholders[0].name + " " + placeholders[1].name + " " + placeholders[2].name + " " + placeholders[3].name + " " + pressedButton.name + ", when the correct sequence was " + corButtons[0].name + " " + corButtons[1].name + " " + corButtons[2].name + " " + corButtons[3].name + " " + corButtons[4].name);
                     pressedButton = null;
+                    FlickerRoutine = StartCoroutine(FlickerCoRoutine5());
                     placeholders.Clear();
                 }
             }
         }
+    }
+
+    private bool isCommandValid(string cmd)
+    {
+        string[] validbtns = { "tb", "ty", "tr", "tg", "rb", "ry", "rr", "rg", "lb", "ly", "lr", "lg", "bb", "by", "br", "bg"};
+
+        string btns = cmd.Substring(6);
+        string[] btnSequence = btns.Split(' ');
+
+        foreach (var btn in btnSequence)
+        {
+            if (!validbtns.Contains(btn.ToLower()))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public string TwitchHelpMessage = "Press a button using !{0} press TB to press TB. Valid buttons are TB, TY, TR, TG, RB, RY, RR, RG, LB, LY, LR, LG, BB, BY, BR, BG.";
@@ -464,74 +487,77 @@ public class simonsScript : MonoBehaviour
             }
             foreach (var btn in btnSequence)
             {
-                yield return null;
+                if (isCommandValid(cmd))
+                {
+                    yield return null;
 
-                if (btn == "TB")
-                {
-                    yield return new KMSelectable[] { buttons[0] };
-                }
+                    if (btn.ToLower() == "tb")
+                    {
+                        yield return new KMSelectable[] { buttons[0] };
+                    }
 
-                else if (btn == "TY")
-                {
-                    yield return new KMSelectable[] { buttons[1] };
-                }
+                    else if (btn.ToLower() == "ty")
+                    {
+                        yield return new KMSelectable[] { buttons[1] };
+                    }
 
-                else if (btn == "TR")
-                {
-                    yield return new KMSelectable[] { buttons[2] };
-                }
+                    else if (btn.ToLower() == "tr")
+                    {
+                        yield return new KMSelectable[] { buttons[2] };
+                    }
 
-                else if (btn == "TG")
-                {
-                    yield return new KMSelectable[] { buttons[3] };
-                }
-                else if (btn == "RB")
-                {
-                    yield return new KMSelectable[] { buttons[4] };
-                }
-                else if (btn == "RY")
-                {
-                    yield return new KMSelectable[] { buttons[5] };
-                }
-                else if (btn == "RR")
-                {
-                    yield return new KMSelectable[] { buttons[6] };
-                }
-                else if (btn == "RG")
-                {
-                    yield return new KMSelectable[] { buttons[7] };
-                }
-                else if (btn == "LB")
-                {
-                    yield return new KMSelectable[] { buttons[8] };
-                }
-                else if (btn == "LY")
-                {
-                    yield return new KMSelectable[] { buttons[9] };
-                }
-                else if (btn == "LR")
-                {
-                    yield return new KMSelectable[] { buttons[10] };
-                }
-                else if (btn == "LG")
-                {
-                    yield return new KMSelectable[] { buttons[11] };
-                }
-                else if (btn == "BB")
-                {
-                    yield return new KMSelectable[] { buttons[12] };
-                }
-                else if (btn == "BY")
-                {
-                    yield return new KMSelectable[] { buttons[13] };
-                }
-                else if (btn == "BR")
-                {
-                    yield return new KMSelectable[] { buttons[14] };
-                }
-                else if (btn == "BG")
-                {
-                    yield return new KMSelectable[] { buttons[15] };
+                    else if (btn.ToLower() == "tg")
+                    {
+                        yield return new KMSelectable[] { buttons[3] };
+                    }
+                    else if (btn.ToLower() == "rb")
+                    {
+                        yield return new KMSelectable[] { buttons[4] };
+                    }
+                    else if (btn.ToLower() == "ry")
+                    {
+                        yield return new KMSelectable[] { buttons[5] };
+                    }
+                    else if (btn.ToLower() == "rr")
+                    {
+                        yield return new KMSelectable[] { buttons[6] };
+                    }
+                    else if (btn.ToLower() == "rg")
+                    {
+                        yield return new KMSelectable[] { buttons[7] };
+                    }
+                    else if (btn.ToLower() == "lb")
+                    {
+                        yield return new KMSelectable[] { buttons[8] };
+                    }
+                    else if (btn.ToLower() == "ly")
+                    {
+                        yield return new KMSelectable[] { buttons[9] };
+                    }
+                    else if (btn.ToLower() == "lr")
+                    {
+                        yield return new KMSelectable[] { buttons[10] };
+                    }
+                    else if (btn.ToLower() == "lg")
+                    {
+                        yield return new KMSelectable[] { buttons[11] };
+                    }
+                    else if (btn.ToLower() == "bb")
+                    {
+                        yield return new KMSelectable[] { buttons[12] };
+                    }
+                    else if (btn.ToLower() == "by")
+                    {
+                        yield return new KMSelectable[] { buttons[13] };
+                    }
+                    else if (btn.ToLower() == "br")
+                    {
+                        yield return new KMSelectable[] { buttons[14] };
+                    }
+                    else if (btn.ToLower() == "bg")
+                    {
+                        yield return new KMSelectable[] { buttons[15] };
+                    }
                 }
                 else
                 {
@@ -795,27 +821,6 @@ public class simonsScript : MonoBehaviour
             corButtons[4] = selCorrectButton;
             DebugMsg("Correct button for Button 5 is " + corButtons[4].name);
             selSelectedButton = selButtons[4];
-
-            if (stageNumber == 0)
-            {
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine1());
-            }
-            else if (stageNumber == 1)
-            {
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine2());
-            }
-            else if (stageNumber == 2)
-            {
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine3());
-            }
-            else if (stageNumber == 3)
-            {
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine4());
-            }
-            else
-            {
-                FlickerRoutine = StartCoroutine(FlickerCoRoutine5());
-            }
         }
     }
 }

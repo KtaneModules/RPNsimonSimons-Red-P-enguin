@@ -21,6 +21,6 @@ MonoBehaviour:
     of helping me make it half-bearable to look at.\r\nThanks so much to the TP community
     on Strike_Kaboom's stream for being so enthusiastic about this mod.\r\n\r\nFind
     the manual here: https://ktane.timwi.de/HTML/Simon%20Simons.html\n=="
-  version: 1.11
+  version: 1.2
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 1f942dbf46bf38d41afc309feb28bbd1, type: 3}
