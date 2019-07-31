@@ -9,7 +9,7 @@ public class simonsScript : MonoBehaviour
     public KMBombInfo bomb;
     public KMAudio Audio;
 
-    static int ModuleIdCounter = 0;
+    static int ModuleIdCounter = 1;
     int ModuleId;
     private bool moduleSolved = false;
     private int buttonIndex = 0;
