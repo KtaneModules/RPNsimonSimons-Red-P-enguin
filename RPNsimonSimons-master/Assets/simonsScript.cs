@@ -27,6 +27,7 @@ public class simonsScript : MonoBehaviour
     private Coroutine FlickerRoutine;
     private bool stopLights = false;
     private int stageNumber = 0;
+    private int howManyStages = 0;
     public Light[] lights;
     private int currentStrikes = 0;
     private bool invalidCommand;
@@ -44,6 +45,7 @@ public class simonsScript : MonoBehaviour
 
     void pickButtonColor()
     {
+        howManyStages = UnityEngine.Random.Range(0, 3) + 3;
         //1
         buttonIndex = UnityEngine.Random.Range(0, 15);
         selButtons[0] = buttons[buttonIndex];
@@ -117,11 +119,11 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 0 && stopLights == false)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[0].enabled = false;
         }
     }
@@ -130,17 +132,17 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 1 && stopLights == false)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = false;
         }
     }
@@ -149,23 +151,23 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 2 && stopLights == false)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[2].enabled = true;
             otherPlaceholder = selButtons[2];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[2].enabled = false;
         }
     }
@@ -174,29 +176,29 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 3 && stopLights == false)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[2].enabled = true;
             otherPlaceholder = selButtons[2];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[2].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[3].enabled = true;
             otherPlaceholder = selButtons[3];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[3].enabled = false;
         }
     }
@@ -205,35 +207,35 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 4 && stopLights == false)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.75f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[0].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = true;
             otherPlaceholder = selButtons[1];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[1].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[2].enabled = true;
             otherPlaceholder = selButtons[2];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[2].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[3].enabled = true;
             otherPlaceholder = selButtons[3];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[3].enabled = false;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[4].enabled = true;
             otherPlaceholder = selButtons[4];
             sound();
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.5f);
             selLights[4].enabled = false;
         }
     }
@@ -821,6 +823,132 @@ public class simonsScript : MonoBehaviour
             corButtons[4] = selCorrectButton;
             DebugMsg("Correct button for Button 5 is " + corButtons[4].name);
             selSelectedButton = selButtons[4];
+        }
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        placeholders.Clear();
+        yield return new WaitForSeconds(.001f);
+        if (stageNumber == 0)
+        {
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[4].OnInteract();
+        }
+        else if(stageNumber == 1)
+        {
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[4].OnInteract();
+        }
+        else if (stageNumber == 2)
+        {
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[4].OnInteract();
+        }
+        else if (stageNumber == 3)
+        {
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[4].OnInteract();
+        }
+        else
+        {
+            corButtons[0].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[1].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[2].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[3].OnInteract();
+            yield return new WaitForSeconds(.01f);
+            corButtons[4].OnInteract();
         }
     }
 }
