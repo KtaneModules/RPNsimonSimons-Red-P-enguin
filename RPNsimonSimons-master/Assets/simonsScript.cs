@@ -833,121 +833,121 @@ public class simonsScript : MonoBehaviour
         if (stageNumber == 0)
         {
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[4].OnInteract();
         }
         else if(stageNumber == 1)
         {
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[4].OnInteract();
         }
         else if (stageNumber == 2)
         {
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[4].OnInteract();
         }
         else if (stageNumber == 3)
         {
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[4].OnInteract();
         }
         else
         {
             corButtons[0].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[1].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[2].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[3].OnInteract();
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             corButtons[4].OnInteract();
         }
     }
