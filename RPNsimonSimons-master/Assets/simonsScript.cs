@@ -119,7 +119,7 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 0 && stopLights == false)
         {
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(1f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
@@ -132,7 +132,7 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 1 && stopLights == false)
         {
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(1f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
@@ -151,7 +151,7 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 2 && stopLights == false)
         {
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(1f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
@@ -176,7 +176,7 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 3 && stopLights == false)
         {
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(1f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
@@ -207,7 +207,7 @@ public class simonsScript : MonoBehaviour
     {
         while (stageNumber == 4 && stopLights == false)
         {
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(1f);
             selLights[0].enabled = true;
             otherPlaceholder = selButtons[0];
             sound();
@@ -277,6 +277,12 @@ public class simonsScript : MonoBehaviour
         }
     }
 
+    private IEnumerator PressedFlash(int i)
+    {
+        yield return new WaitForSeconds(.5f);
+        lights[i].enabled = false;
+    }
+
     void buttonPressed(KMSelectable pressedButton)
     {
         StopAllCoroutines();
@@ -292,6 +298,15 @@ public class simonsScript : MonoBehaviour
         selLights[4].enabled = false;
 
         pressedButton.AddInteractionPunch();
+
+        for(int i = 0; i < 16; i++)
+        {
+            if(buttons[i] == pressedButton)
+            {
+                lights[i].enabled = true;
+                StartCoroutine(PressedFlash(i));
+            }
+        }
 
         if (moduleSolved == true)
         {
